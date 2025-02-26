@@ -6,14 +6,45 @@ import { motion } from "framer-motion";
 import { Menu, Search, X, ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "../ui/drawer";
+import { Form } from "../ui/form";
+import { Input } from "../ui/input";
+import { MorphingText } from "../magicui/morphing-text";
 
+const logoText = ["the", "green", "cloister"];
 export function Header() {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isTop, setIsTop] = useState(true);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      router.push(
+        `/article?searchTerm=${encodeURIComponent(searchTerm.trim())}`
+      );
+      setOpen(false);
+      setSearchTerm("");
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSearch();
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -89,19 +120,48 @@ export function Header() {
 
         {/* Right section with search and trending */}
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`${
-              pathname.startsWith("/article") || !isTop
-                ? "text-black hover:bg-gray-100"
-                : "text-white hover:bg-white/10"
-            }`}
-          >
-            <Search className="h-5 w-5" />
-            <span className="sr-only">Search</span>
-          </Button>
-
+          {/* search drawer--------------------------------------------- */}
+          <Drawer open={open} onOpenChange={setOpen}>
+            <DrawerTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={`${
+                  pathname.startsWith("/article") || !isTop
+                    ? "text-black hover:bg-gray-100"
+                    : "text-white hover:bg-white/10"
+                }`}
+              >
+                <Search className="h-5 w-5" />
+                <span className="sr-only">Search articles</span>
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="h-screen">
+              <div className="mx-auto w-full max-w-2xl p-6">
+                <div className="flex flex-col items-center justify-center gap-4 h-[50vh]">
+                  <div className="text-center space-y-2 mb-4">
+                    <h2 className="text-2xl font-bold text-primary">
+                      Search Articles
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Enter your search term below
+                    </p>
+                  </div>
+                  <div className="flex w-full max-w-lg gap-2">
+                    <Input
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder="Search articles..."
+                      className="flex-1"
+                    />
+                    <Button onClick={handleSearch}>Search</Button>
+                  </div>
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
+          {/* search drawer end -------------------------------------------------- */}
           {/* Mobile Menu */}
           <Sheet>
             <SheetTrigger asChild>

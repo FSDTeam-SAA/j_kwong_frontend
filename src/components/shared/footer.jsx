@@ -1,7 +1,26 @@
 import Link from "next/link";
 import { Facebook, Twitter, Youtube, Linkedin } from "lucide-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Footer() {
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?limit=4`
+        );
+        setBlogs(response.data.data); // Adjust based on API response structure
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+  console.log(blogs);
   return (
     <footer className="py-16">
       <div className="container">
@@ -46,25 +65,25 @@ export default function Footer() {
             </div>
             <nav className="space-y-2">
               <Link
-                href="#"
+                href="/"
                 className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
               >
                 HOME
               </Link>
               <Link
-                href="#"
+                href="/article"
                 className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
               >
                 ARTICLES
               </Link>
               <Link
-                href="#"
+                href="/about"
                 className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
               >
                 ABOUT US
               </Link>
               <Link
-                href="#"
+                href="/contact"
                 className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
               >
                 CONTACT US
@@ -81,30 +100,15 @@ export default function Footer() {
               </h3>
             </div>
             <nav className="space-y-2">
-              <Link
-                href="#"
-                className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
-              >
-                Jeremy Clarkson: Diddy Squat the Environment?
-              </Link>
-              <Link
-                href="#"
-                className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
-              >
-                The Environmental Impact of Common Land in the UK
-              </Link>
-              <Link
-                href="#"
-                className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
-              >
-                The Paris Olympics: How Sustainable Were They?
-              </Link>
-              <Link
-                href="#"
-                className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base"
-              >
-                Why Nuclear Power Hasn't Taken Over the Energy Industry... Yet
-              </Link>
+              {blogs.map((blog) => (
+                <Link
+                  key={blog.id}
+                  href={`/article/${blog.slug}`}
+                  className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base !line-clamp-2"
+                >
+                  {blog.title}
+                </Link>
+              ))}
             </nav>
           </div>
 

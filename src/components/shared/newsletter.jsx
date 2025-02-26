@@ -40,8 +40,8 @@ export default function Newsletter() {
     <div className="bg-[#E6FFDD] lg:mt-[80px] relative">
       <Particles
         className="absolute inset-0 z-0"
-        quantity={1000}
-        ease={80}
+        quantity={800}
+        ease={20}
         color={"#3e9c3e"}
         refresh
       />

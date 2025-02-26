@@ -69,12 +69,12 @@ export default function ArticlePost() {
               {formattedDate}
             </span>
             <Badge variant="secondary" className="ml-2 bg-primary text-white">
-              {article.category}
+              {article.category.title}
             </Badge>
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
             {article.title}
           </h1>
         </div>

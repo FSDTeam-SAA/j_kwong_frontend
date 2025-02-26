@@ -11,7 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2 } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -25,6 +27,15 @@ export default function ArticleList() {
   const [error, setError] = useState("");
   const [hasNextPage, setHasNextPage] = useState(false);
   const [hasPrevPage, setHasPrevPage] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState(null);
+  const searchParams = useSearchParams();
+
+  const router = useRouter();
+  useEffect(() => {
+    const term = searchParams.get("searchTerm") || "";
+    setSearchTerm(term);
+  }, [searchParams]);
 
   // Fetch categories
   const fetchCategories = useCallback(async () => {
@@ -42,13 +53,16 @@ export default function ArticleList() {
 
   // Fetch articles
   const fetchArticles = useCallback(async () => {
+    if (searchTerm === null) return;
+
     setIsLoading(true);
     setError("");
     try {
       const categoryParam =
         selectedCategory === "all" ? "" : `&category=${selectedCategory}`;
+      const search = searchTerm ? `&search=${searchTerm}` : "";
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?page=${currentPage}&limit=${ITEMS_PER_PAGE}${categoryParam}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?page=${currentPage}&limit=${ITEMS_PER_PAGE}${categoryParam}${search}`
       );
 
       if (response.data.status) {
@@ -65,7 +79,7 @@ export default function ArticleList() {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, selectedCategory]);
+  }, [currentPage, selectedCategory, searchTerm]);
 
   // Initial fetch of categories and articles
   useEffect(() => {
@@ -74,11 +88,24 @@ export default function ArticleList() {
 
   useEffect(() => {
     fetchArticles();
-  }, [fetchArticles]);
+  }, [fetchArticles, searchTerm]);
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
     setCurrentPage(1); // Reset to first page when category changes
+  };
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    // Update the URL parameter
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set("searchTerm", value);
+    } else {
+      params.delete("searchTerm");
+    }
+    router.push(`?${params.toString()}`, undefined, { shallow: true });
   };
 
   const handlePageChange = (pageNumber) => {
@@ -98,24 +125,49 @@ export default function ArticleList() {
     <div className="container mx-auto px-4 mt-[150px]">
       <div className="space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div />
-          <h1 className="text-4xl font-light text-textPrimary flex items-center">
+          <h1 className="text-4xl font-light text-textPrimary flex items-center w-full md:w-1/3">
             <div className="h-8 w-2 bg-primary mr-2"></div>
             All Articles
           </h1>
-          <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select category" />
-            </SelectTrigger>
-            <SelectContent className="bg-white ">
-              <SelectItem value="all">All Categories</SelectItem>
-              {categories.map((category) => (
-                <SelectItem key={category._id} value={category.title}>
-                  {category.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="flex gap-2">
+            <div className="max-w-md w-full mx-auto">
+              <div className="relative">
+                <Input
+                  type="search"
+                  placeholder="Search..."
+                  className="w-full pl-4 pr-12"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+                <Button
+                  type="submit"
+                  size="icon"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
+                >
+                  <Search className="h-4 w-4" />
+                  <span className="sr-only">Search</span>
+                </Button>
+              </div>
+            </div>
+
+            <Select
+              value={selectedCategory}
+              onValueChange={handleCategoryChange}
+              className="w-full md:w-1/3"
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent className="bg-white ">
+                <SelectItem value="all">All Categories</SelectItem>
+                {categories.map((category) => (
+                  <SelectItem key={category._id} value={category.title}>
+                    {category.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {isLoading ? (

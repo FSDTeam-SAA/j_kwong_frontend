@@ -12,7 +12,6 @@ export default function AdminArticleDetails() {
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  console.log(article.description);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -70,8 +69,9 @@ export default function AdminArticleDetails() {
               {formattedDate}
             </span>
             <Badge variant="secondary" className="ml-2 bg-primary text-white">
-              {article.category}
+              {article.category.title}
             </Badge>
+            <span>{article.views}</span>
           </div>
 
           {/* Title */}
@@ -99,6 +99,23 @@ export default function AdminArticleDetails() {
             className="text-lg leading-relaxed"
             dangerouslySetInnerHTML={{ __html: article.description }}
           />
+        </div>
+        <div className="my-4 md:my-8">
+          <h3 className="my-4 md:my-8 font-bold">References:</h3>
+          <ol>
+            {article.referenceUrl.map((url, index) => (
+              <li key={index} className="mr-2">
+                <a
+                  href={url.startsWith("http") ? url : `https://${url}`}
+                  className="text-primary hover:bg-primary hover:text-white p-1 duration-300 rounded-sm underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {url}
+                </a>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </article>

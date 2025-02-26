@@ -55,7 +55,7 @@ export default function Hero() {
                     width={800}
                     height={500}
                     alt="Logo"
-                    className="h-[70px] w-[300px] md:h-[100px] md:w-[490px]"
+                    className="h-[70px] w-[300px] md:h-[120px] md:w-[600px]"
                   />
                 </FadeR>
                 <StaggeredText
@@ -78,13 +78,13 @@ export default function Hero() {
               </div>
               <div>
                 <FadeR delay={1.2}>
-                  <Link href="/article/123">
+                  <Link href="/article">
                     <Button
                       className="bg-[#66b843] text-white hover:bg-primary/90 text-lg px-6 py-6 h-[52px] rounded-md mt-6"
                       onMouseEnter={handleHoverStart}
                       onMouseLeave={handleHoverEnd}
                     >
-                      <span>Read Latest Article</span>
+                      <span>Read Latest Articles</span>
                       <motion.div
                         className="inline-block ml-2"
                         animate={controls}

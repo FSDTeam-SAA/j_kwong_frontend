@@ -68,7 +68,7 @@ const ArticleCard = ({ article, index }) => {
           href={`/article/${article.slug}`}
           className="group relative block w-fit"
         >
-          <h2 className="mb-3 text-[18px] lg:text-[24px] font-semibold leading-tight text-textPrimary hover:text-primary relative transition-all duration-300">
+          <h2 className="mb-3 text-[14px] lg:text-[20px] font-semibold leading-tight text-textPrimary hover:text-primary relative transition-all duration-300 line-clamp-2">
             {article.title}
           </h2>
         </Link>

@@ -8,15 +8,18 @@ export default function StatsBar() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [blogsRes, categoriesRes] = await Promise.all([
+        const [blogsRes, categoriesRes, viewsRes] = await Promise.all([
           axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs`),
           axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`),
+          axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/stats/total-views`
+          ),
         ]);
 
         setStats({
           blogs: blogsRes.data.pagination.totalBlogs,
           categories: categoriesRes.data.data.length,
-          readers: 54, // Keep it static for now
+          readers: viewsRes.data.totalViews,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);

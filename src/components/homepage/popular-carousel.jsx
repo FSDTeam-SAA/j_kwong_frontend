@@ -64,9 +64,9 @@ export default function PopularCarousel() {
             <CarouselContent>
               {latestArticle.map((article, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="overflow-hidden border-none rounded-lg bg-transparent select-none shadow-none">
-                    <Link href={`/article/${article.slug}`} className="">
-                      <div className="border-2 border-primary rounded-lg min-w-[370px] h-[250px] overflow-hidden box-border">
+                  <Card className=" border-none rounded-lg bg-transparent select-none shadow-none">
+                    <Link href={`/article/${article.slug}`}>
+                      <div className="border-2 border-primary rounded-lg min-w-[370px] h-[250px] box-border">
                         <Image
                           src={`${process.env.NEXT_PUBLIC_API_URL}${article.image}`}
                           alt={article.title}
@@ -79,9 +79,9 @@ export default function PopularCarousel() {
 
                     <div className="bg-transparent">
                       {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" /> */}
-                      <div className="">
+                      <div>
                         <Link href={`/article/${article.slug}`}>
-                          <h3 className="text-textPrimary hover:text-primary font-semibold mb-2 text-[18px] lg:text-[24px] pt-4">
+                          <h3 className="text-textPrimary hover:text-primary font-semibold mb-2 text-[14px] lg:text-[20px] pt-4 line-clamp-2">
                             {article.title}
                           </h3>
                         </Link>
