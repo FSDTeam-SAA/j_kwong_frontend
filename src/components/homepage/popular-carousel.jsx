@@ -20,7 +20,7 @@ export default function PopularCarousel() {
   const fetchLatestBlogs = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/v1/blogs/latest`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/latest`
       );
       const publishedBlogs = response.data.data.filter(
         (blog) => blog.isPublished === true
