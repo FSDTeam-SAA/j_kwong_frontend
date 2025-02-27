@@ -195,7 +195,7 @@ export default function AdminLayout({ children }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8 bg-primary flex items-center justify-center">
+                <Avatar className="h-8 w-8 bg-primary flex items-center juenstify-center">
                   {/* <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="@shadcn"
