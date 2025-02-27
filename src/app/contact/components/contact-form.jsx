@@ -16,6 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ContactDetails from "./contact-details";
+import axios from "axios";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -43,8 +45,17 @@ export default function ContactForm() {
     },
   });
 
-  function onSubmit(values) {
-    console.log(values);
+  async function onSubmit(values) {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/contact`,
+        values
+      );
+      toast("Message sent successfully.");
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   }
 
   return (

@@ -62,7 +62,7 @@ export default function ArticleList() {
         selectedCategory === "all" ? "" : `&category=${selectedCategory}`;
       const search = searchTerm ? `&search=${searchTerm}` : "";
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?page=${currentPage}&limit=${ITEMS_PER_PAGE}${categoryParam}${search}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?page=${currentPage}&limit=${ITEMS_PER_PAGE}${categoryParam}${search}&publish=true`
       );
 
       if (response.data.status) {

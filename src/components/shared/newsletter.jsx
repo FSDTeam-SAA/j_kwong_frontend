@@ -46,13 +46,13 @@ export default function Newsletter() {
         refresh
       />
       <div className="container flex flex-wrap min-h-[350px] justify-between items-center py-10 gap-16 md:gap-0">
-        <div className="max-w-3xl z-50">
+        <div className="max-w-3xl z-30">
           <h2 className="text-textPrimary text-2xl font-semibold mb-2">
             Subscribe to our Newsletter
           </h2>
           <p className="text-textPrimary mb-6">
-            Lorem ipsum dolor sit amet consectetur. A nulla morbi suspendisse ut
-            sed commodo senectus tortor. Diam eu et at neque.
+            Stay updated with the latest articles and insights from the Green
+            Cloister, straight to your inbox.
           </p>
           <form onSubmit={handleSubmit} className="flex gap-2 max-w-md">
             <input
@@ -73,7 +73,7 @@ export default function Newsletter() {
           </form>
           {message && <p className="mt-4 text-sm text-gray-700">{message}</p>}
         </div>
-        <div className="lg:mr-[50px] z-50 mx-auto">
+        <div className="lg:mr-[50px] z-30 mx-auto">
           <Image
             src="/assets/homepage/leaf.png"
             alt="Leaf decoration"

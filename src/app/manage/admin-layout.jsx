@@ -3,7 +3,16 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FilePlus, LayoutDashboard, Menu, LogOut } from "lucide-react";
+import {
+  FilePlus,
+  LayoutDashboard,
+  Menu,
+  LogOut,
+  User,
+  Contact,
+  Newspaper,
+  User2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -61,7 +70,27 @@ const navItems = [
       {
         title: "Manage Newsletter",
         href: "/manage/newsletter",
-        icon: <FilePlus className="w-5 h-5" />,
+        icon: <Newspaper className="w-5 h-5" />,
+      },
+    ],
+  },
+  {
+    title: "Contact Messages",
+    items: [
+      {
+        title: "Contact Messages",
+        href: "/manage/contact",
+        icon: <Contact className="w-5 h-5" />,
+      },
+    ],
+  },
+  {
+    title: "User Management",
+    items: [
+      {
+        title: "Users",
+        href: "/manage/user",
+        icon: <User className="w-5 h-5" />,
       },
     ],
   },
@@ -74,8 +103,10 @@ export default function AdminLayout({ children }) {
 
   const handleLogOut = () => {
     Cookies.remove("authToken");
+    Cookies.remove("userId");
     router.push("/login");
   };
+
   React.useEffect(() => {
     setTimeout(() => {
       document.documentElement.style.overflow = "hidden";
@@ -164,22 +195,19 @@ export default function AdminLayout({ children }) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage
+                <Avatar className="h-8 w-8 bg-primary flex items-center justify-center">
+                  {/* <AvatarImage
                     src="https://github.com/shadcn.png"
                     alt="@shadcn"
-                  />
-                  <AvatarFallback>AD</AvatarFallback>
+                  /> */}
+                  <User2 className="h-8 w-8 text-white" />
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuContent align="end" className="w-auto bg-white">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">shadcn</p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    admin@example.com
-                  </p>
+                  <p className="text-sm font-medium leading-none">Admin</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />

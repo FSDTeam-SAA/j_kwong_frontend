@@ -42,11 +42,19 @@ export default function LoginForm() {
       const data = response.data;
 
       if (data.status) {
-        // Store token in a cookie
-        Cookies.set("authToken", data.data.token, {
+        const { token, userFound } = data.data;
+
+        // Store token and user ID in cookies
+        Cookies.set("authToken", token, {
           expires: 7, // Expires in 7 days
-          secure: process.env.NODE_ENV === "production", // Ensures the cookie is sent over HTTPS in production
-          sameSite: "strict", // Helps prevent CSRF attacks
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
+        });
+
+        Cookies.set("userId", userFound._id, {
+          expires: 7,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "strict",
         });
 
         toast.success(data.message);
@@ -59,7 +67,6 @@ export default function LoginForm() {
       }
     } catch (error) {
       if (error.response) {
-        // Server responded with a status other than 2xx
         if (error.response.status === 404) {
           setErrorMessage("Invalid credentials. Please try again.");
         } else {
@@ -69,12 +76,10 @@ export default function LoginForm() {
           );
         }
       } else if (error.request) {
-        // Request was made but no response received
         setErrorMessage(
           "No response from server. Please check your network connection."
         );
       } else {
-        // Something else happened while setting up the request
         setErrorMessage("An unexpected error occurred. Please try again.");
       }
     } finally {

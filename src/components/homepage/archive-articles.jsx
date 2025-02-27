@@ -15,7 +15,7 @@ export default function ArchiveArticles() {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs`,
           {
-            params: { limit: 6 },
+            params: { limit: 6, publish: true },
           }
         );
         setArticles(response.data.data); // Fix: Access 'data' instead of 'blogs'

@@ -34,10 +34,10 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-textPrimary text-sm md:text-base leading-relaxed">
-              Welcome to [College Name]'s Student-Run Environmental Publication,
-              a platform created and managed by students passionate about
-              protecting our planet. Our mission is to raise awareness and
-              promote sustainability.
+              The Green Cloister is an independent environmental publication,
+              created by passionate students from Winchester College. Our
+              mission is to raise awareness and promote sustainability across
+              campus and beyond.
             </p>
             <div className="flex gap-4 text-gray-400">
               <Link href="#" className="hover:text-primary transition-colors">
@@ -102,7 +102,7 @@ export default function Footer() {
             <nav className="space-y-2">
               {blogs.map((blog) => (
                 <Link
-                  key={blog.id}
+                  key={blog._id}
                   href={`/article/${blog.slug}`}
                   className="block text-textPrimary hover:text-primary transition-colors text-sm md:text-base !line-clamp-2"
                 >
@@ -121,9 +121,7 @@ export default function Footer() {
               </h3>
             </div>
             <div className="space-y-2 text-textPrimary text-sm md:text-base">
-              <p>Company address</p>
-              <p>e-mail: example@gmail.com</p>
-              <p>Contact: 4654444</p>
+              <p>E-mail: thegreencloister@gmail.com</p>
             </div>
           </div>
         </div>

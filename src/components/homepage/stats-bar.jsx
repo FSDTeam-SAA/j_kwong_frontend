@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { NumberTicker } from "../magicui/number-ticker";
 import axios from "axios";
@@ -8,18 +9,16 @@ export default function StatsBar() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [blogsRes, categoriesRes, viewsRes] = await Promise.all([
-          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs`),
-          axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`),
-          axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/v1/stats/total-views`
-          ),
-        ]);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/stats`
+        );
+
+        console.log("my responssssssssssssssssssssssssss", response.data.data);
 
         setStats({
-          blogs: blogsRes.data.pagination.totalBlogs,
-          categories: categoriesRes.data.data.length,
-          readers: viewsRes.data.totalViews,
+          blogs: response.data.data.totalBlogs,
+          categories: response.data.data.totalCategory,
+          readers: response.data.data.totalViews,
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
@@ -28,7 +27,6 @@ export default function StatsBar() {
 
     fetchStats();
   }, []);
-
   return (
     <div className="max-w-[770px] bg-white backdrop-blur-[70px] shadow-md py-8 px-4 rounded-[12px] w-[98%] lg:w-full mx-auto">
       <div className="grid grid-cols-3 gap-8 text-center">

@@ -4,37 +4,25 @@ import React from "react";
 const MainSection = () => {
   return (
     <div className="container">
-      <div className="grid md:grid-cols-[1fr,auto] gap-10 lg:gap-8 items-start my-[40px] md:my-[80px]">
+      <div className="grid md:grid-cols-[1fr,auto] gap-10 lg:gap-8 items-center my-[40px] md:my-[80px]">
         <div className="space-y-6 lg:w-[450px] text-[16px]">
           <p className="text-textPrimary leading-relaxed">
-            Welcome to [College Name]&apos;s Student-Run Environmental
-            Publication, a platform created and managed by students passionate
-            about protecting our planet. Our mission is to raise awareness,
-            ignite meaningful discussions, and inspire action towards a more
-            sustainable future.
+            The Green Cloister is an independent, student-run environmental
+            publication founded and led by Jensen and Jason, two students from
+            Winchester College originally from Hong Kong.
           </p>
 
           <p className="text-textPrimary leading-relaxed">
-            As an entirely student-driven publication, we provide a space for
-            students to explore environmental issues, share innovative
-            solutions, and highlight the work of individuals and organizations
-            making a positive impact on the environment. We believe that
-            informed and engaged students have the power to drive change, and
-            through our publication, we aim to foster a community of
-            environmental advocates.
+            The name "the Green Cloister" draws inspiration from the historic
+            "War Cloister" at Winchester College, representing our commitment to
+            fostering a platform for thoughtful discussion and action on a wide
+            range of environmental issues.
           </p>
 
           <p className="text-textPrimary leading-relaxed">
-            Whether it&apos;s covering the latest in climate science,
-            sustainability initiatives, or offering tips for living more
-            eco-friendly, our goal is to educate, inspire, and motivate our
-            readers to take practical steps in preserving the world around us.
-          </p>
-
-          <p className="text-textPrimary leading-relaxed">
-            We are committed to providing diverse perspectives on environmental
-            challenges and solutions, and we encourage submissions from all
-            members of the college community.
+            As founders and chief editors, our goal is to raise awareness,
+            explore diverse ecological topics, and inspire positive
+            environmental change on campus and beyond.
           </p>
         </div>
 
@@ -65,19 +53,10 @@ const MainSection = () => {
           About Us
         </h1>
         <p className="text-textPrimary">
-          The publication is run by a team of students at Eton College. We aim
-          to provide students with a platform to explore their passion for
-          sustainability and the environment through the ability to read, write
-          and create media for the publication.
-          <br />
-          <br />
-          This issue is one of the most important issues that humanity has ever
-          faced and we believe that a deep understanding of how we can solve it
-          is necessary.
-          <br />
-          <br /> We welcome articles throughout the year and update the site
-          constantly! Get involved by reaching out with our contact form, or
-          send an email to theflorentina@etoncollege.org.uk.
+          The Green Cloister is an independent environmental publication,
+          created by passionate students from Winchester College. Our mission is
+          to raise awareness and promote sustainability across campus and
+          beyond.
         </p>
       </div>
     </div>

@@ -1,15 +1,19 @@
 import React from "react";
 import AdminLayout from "./admin-layout";
+import Stats from "./stats";
+import BlogStatsChart from "./components/stats-chart";
 
 const page = () => {
   return (
     <AdminLayout>
       <div className="space-y-4">
         <h1 className="text-2xl font-bold text-primary">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Welcome to your blog admin panel. Here you can manage your blog posts,
-          view analytics, and more.
-        </p>
+        <div>
+          <div className="mb-10">
+            <BlogStatsChart />
+          </div>
+          <Stats />
+        </div>
       </div>
     </AdminLayout>
   );

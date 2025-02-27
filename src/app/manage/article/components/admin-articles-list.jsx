@@ -17,12 +17,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Check, Loader2 } from "lucide-react";
+import { Check, Cross, Loader2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import ConfirmDeleteDialog from "./confirm-delete-dialog";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 export default function AdminArticlesList() {
   const [posts, setPosts] = useState([]);
@@ -107,6 +107,22 @@ export default function AdminArticlesList() {
   const handleOpenDelete = (slug) => {
     setSelectedSlug(slug);
     setOpenDelete(true);
+  };
+  const handlePublish = async (slug, isPublished) => {
+    if (!slug) return;
+
+    const url = isPublished
+      ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/unpublish/${slug}`
+      : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/${slug}`;
+
+    try {
+      const response = await axios.post(url);
+      console.log("Response:", response.data);
+
+      fetchPosts();
+    } catch (error) {
+      console.error("Error updating publish status:", error);
+    }
   };
 
   if (error) {
@@ -196,7 +212,7 @@ export default function AdminArticlesList() {
                         className="w-1/2"
                         passHref
                       >
-                        <Button className="flex-1 bg-primary  hover:bg-primary/80 text-white w-full">
+                        <Button className="flex-1 bg-yellow-500  hover:bg-yellow-600 text-white w-full">
                           Edit
                         </Button>
                       </Link>
@@ -213,16 +229,22 @@ export default function AdminArticlesList() {
                         setUpdateFetch={setUpdateFetch}
                       />
                     </div>
-                    {/* <Button
+                    <Button
                       className={`w-full ${
                         post.isPublished
                           ? "bg-yellow-500 hover:bg-yellow-600"
                           : "bg-primary hover:bg-primary/80"
                       }`}
+                      onClick={() => handlePublish(post.slug, post.isPublished)}
                     >
                       {post.isPublished ? "Unpublish" : "Publish"}
-                      <Check className="ml-1 h-4 w-4" />
-                    </Button> */}
+
+                      {!post.isPublished ? (
+                        <Check className="ml-1 h-4 w-4" />
+                      ) : (
+                        <div>X</div>
+                      )}
+                    </Button>
                   </CardFooter>
                 </div>
               </Card>

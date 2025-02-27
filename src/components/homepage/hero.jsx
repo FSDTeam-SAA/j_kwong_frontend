@@ -45,7 +45,7 @@ export default function Hero() {
         <div className="container">
           <div
             className="max-w-[1050px] max-h-[440px] flex-col items-center"
-            gradientColor="#00800066"
+            gradientcolor="#00800066"
           >
             <div className="">
               <div className="space-y-4">

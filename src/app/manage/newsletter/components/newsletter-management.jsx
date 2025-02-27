@@ -70,9 +70,9 @@ export default function NewsletterDashboard() {
   };
 
   return (
-    <div className="container mx-auto py-10 space-y-8">
+    <div className=" mx-auto py-10 space-y-8">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">Send Newsletter</h2>
+        <h2 className="text-2xl font-bold text-primary">Send Newsletter</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="sub" className="text-sm font-medium">

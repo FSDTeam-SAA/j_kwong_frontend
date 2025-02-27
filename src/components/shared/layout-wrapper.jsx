@@ -5,6 +5,7 @@ import { Header } from "@/components/shared/header";
 import Newsletter from "@/components/shared/newsletter";
 import Footer from "@/components/shared/footer";
 import { Toaster } from "sonner";
+import BackToTop from "./back-to-top";
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export default function LayoutWrapper({ children }) {
       {children}
       {!isHiddenRoute && (
         <>
+          <BackToTop />
           <Newsletter />
           <Footer />
         </>

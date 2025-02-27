@@ -18,11 +18,19 @@ export default function PopularCarousel() {
   const [latestArticle, setLatestArticle] = useState([]);
 
   const fetchLatestBlogs = async () => {
-    const response = await axios.get(
-      `http://localhost:5000/api/v1/blogs/latest`
-    );
-    setLatestArticle(response.data.data);
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/v1/blogs/latest`
+      );
+      const publishedBlogs = response.data.data.filter(
+        (blog) => blog.isPublished === true
+      );
+      setLatestArticle(publishedBlogs);
+    } catch (error) {
+      console.error("Error fetching blogs:", error);
+    }
   };
+
   useEffect(() => {
     fetchLatestBlogs();
   }, []);

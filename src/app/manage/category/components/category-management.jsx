@@ -225,7 +225,6 @@ export function CategoryManagement() {
           <TableHeader>
             <TableRow>
               <TableHead>Title</TableHead>
-              <TableHead>Slug</TableHead>
               <TableHead>Created At</TableHead>
               <TableHead className="w-[100px]">Actions</TableHead>
             </TableRow>
@@ -246,7 +245,6 @@ export function CategoryManagement() {
                   <TableCell className="font-medium">
                     {category.title}
                   </TableCell>
-                  <TableCell>{category.slug}</TableCell>
                   <TableCell>
                     {new Date(category.createdAt).toLocaleDateString()}
                   </TableCell>
