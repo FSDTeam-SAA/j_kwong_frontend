@@ -93,11 +93,6 @@ export default function ArticleForm({ mode = "add", initialData }) {
   async function onSubmit(data) {
     setIsLoading(true);
     try {
-      const token = Cookies.get("authToken");
-      if (!token) {
-        throw new Error("Authentication token not found. Please log in.");
-      }
-
       const formData = new FormData();
       // console.log("formData", formData);
       Object.keys(data).forEach((key) => {
@@ -126,10 +121,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
       const response = await axios({
         method: method,
         url: endpoint,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         data: formData,
+        withCredentials: true, // ⬅️ Ensures cookies (including auth token) are sent automatically
       });
 
       if (response.status) {

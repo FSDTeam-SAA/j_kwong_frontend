@@ -32,7 +32,6 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import { Edit2, Loader2, Plus, Trash } from "lucide-react";
-import Cookies from "js-cookie";
 
 export function CategoryManagement() {
   const [categories, setCategories] = React.useState([]);
@@ -73,17 +72,14 @@ export function CategoryManagement() {
         : "${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories";
 
       const method = selectedCategory ? "PUT" : "POST";
-      const token = Cookies.get("authToken");
-      if (!token) {
-        throw new Error("Authentication token not found. Please log in.");
-      }
+
       const response = await fetch(url, {
         method,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Add the Authorization header
         },
         body: JSON.stringify({ title }),
+        credentials: "include",
       });
 
       const data = await response.json();
@@ -104,10 +100,6 @@ export function CategoryManagement() {
 
   const handleDelete = async () => {
     if (!selectedCategory) return;
-    const token = Cookies.get("authToken");
-    if (!token) {
-      throw new Error("Authentication token not found. Please log in.");
-    }
 
     try {
       const response = await fetch(
@@ -116,8 +108,8 @@ export function CategoryManagement() {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Add the Authorization header
           },
+          credentials: "include",
         }
       );
 

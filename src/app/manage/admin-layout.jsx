@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
@@ -101,10 +101,22 @@ export default function AdminLayout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLogOut = () => {
-    Cookies.remove("authToken");
-    Cookies.remove("userId");
-    router.push("/login");
+  const handleLogOut = async () => {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`,
+        {}
+      );
+
+      // Remove auth-related cookies
+      Cookies.remove("authToken");
+      Cookies.remove("userId");
+
+      // Redirect to login page
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error.response?.data || error.message);
+    }
   };
 
   React.useEffect(() => {

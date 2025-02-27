@@ -89,15 +89,13 @@ export default function UserManagement() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const userId = Cookies.get("userId");
-        if (!userId) {
-          toast.error("User ID not found in cookies");
-          return;
-        }
-
         const response = await fetch(
-          `http://localhost:5000/api/v1/users/${userId}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/me`,
+          {
+            credentials: "include", // Ensures cookies are sent
+          }
         );
+
         const data = await response.json();
 
         if (data.status) {
@@ -112,7 +110,9 @@ export default function UserManagement() {
 
     const fetchAllUsers = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/v1/users");
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users`
+        );
         const data = await response.json();
 
         if (data.status) {

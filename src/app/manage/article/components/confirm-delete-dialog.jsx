@@ -9,7 +9,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import Cookies from "js-cookie";
 
 const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
   const [loading, setLoading] = useState(false);
@@ -27,9 +26,7 @@ const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/${slug}`,
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          withCredentials: true, // ⬅️ Ensures cookies are sent with the request
         }
       );
 
