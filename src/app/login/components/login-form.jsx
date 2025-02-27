@@ -36,20 +36,21 @@ export default function LoginForm() {
         {
           email,
           password,
-        }
+        },
+        { withCredentials: true }
       );
 
       const data = response.data;
 
       if (data.status) {
-        const { token, userFound } = data.data;
+        const { userFound } = data.data;
 
         // Store token and user ID in cookies
-        Cookies.set("authToken", token, {
-          expires: 7, // Expires in 7 days
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
-        });
+        // Cookies.set("authToken", token, {
+        //   expires: 7, // Expires in 7 days
+        //   secure: process.env.NODE_ENV === "production",
+        //   sameSite: "strict",
+        // });
 
         Cookies.set("userId", userFound._id, {
           expires: 7,
