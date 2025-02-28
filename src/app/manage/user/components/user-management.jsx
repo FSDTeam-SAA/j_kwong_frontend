@@ -78,6 +78,9 @@ export default function UserManagement() {
   const [open, setOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
+  const token = Cookies.get("authToken");
+  if (!token) return;
+
   const form = useForm({
     defaultValues: {
       fullName: "",
@@ -89,19 +92,21 @@ export default function UserManagement() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
-        const response = await fetch(
+        const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/me`,
           {
-            credentials: "include", // Ensures cookies are sent
+            withCredentials: true, // Ensures cookies are sent
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Add your token here
+            },
           }
         );
 
-        const data = await response.json();
-
-        if (data.status) {
-          setCurrentUser(data.data);
+        if (response.data.status) {
+          setCurrentUser(response.data.data);
         } else {
-          toast.error(data.message || "Failed to fetch current user");
+          toast.error(response.data.message || "Failed to fetch current user");
         }
       } catch (error) {
         toast.error("Failed to fetch current user details");

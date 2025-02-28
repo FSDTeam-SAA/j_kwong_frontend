@@ -103,10 +103,10 @@ export default function AdminLayout({ children }) {
 
   const handleLogOut = async () => {
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`,
-        {}
-      );
+      // await axios.post(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`,
+      //   {}
+      // );
 
       // Remove auth-related cookies
       Cookies.remove("authToken");

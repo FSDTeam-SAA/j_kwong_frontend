@@ -50,6 +50,9 @@ export default function ArticleForm({ mode = "add", initialData }) {
   const [categories, setCategories] = React.useState([]);
   const [isCategoriesLoading, setIsCategoriesLoading] = React.useState(true);
 
+  const token = Cookies.get("authToken");
+  if (!token) return;
+
   React.useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -78,6 +81,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
           referenceUrl: initialData.referenceUrl?.length
             ? initialData.referenceUrl
             : [""], // Ensure it's an array
+
+          category: initialData?.category._id,
         }
       : {
           title: "",
@@ -94,34 +99,34 @@ export default function ArticleForm({ mode = "add", initialData }) {
     setIsLoading(true);
     try {
       const formData = new FormData();
-      // console.log("formData", formData);
-      Object.keys(data).forEach((key) => {
-        if (key === "image" && data[key] instanceof File) {
-          formData.append("image", data[key]);
-        }
-        //  else if (key === "referenceUrl") {
-        //   data[key].forEach((url, index) => {
-        //     if (url) formData.append(`referenceUrl[${index}]`, url);
 
-        //   });
-        // }
-        else {
-          formData.append(key, data[key]);
-        }
-      });
-      // console.log(formData);
+      formData.append("title", data.title);
+      formData.append("description", data.description);
+      formData.append("category", data.category);
+      formData.append("authorName", data.authorName);
+      formData.append("referenceUrl", data.referenceUrl);
+      formData.append("date", data.date);
+
+      if (data.image) {
+        console.log("appendinf");
+        formData.append("image", data.image);
+      }
+
+      console.log(formData.get("image"));
 
       const endpoint =
         mode === "add"
           ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs`
           : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs/${initialData.slug}`;
       const method = mode === "add" ? "POST" : "PUT";
-      // console.log("data", data);
 
       const response = await axios({
         method: method,
         url: endpoint,
         data: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true, // ⬅️ Ensures cookies (including auth token) are sent automatically
       });
 
@@ -154,6 +159,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
       currentUrls.filter((_, i) => i !== index)
     );
   };
+
+  console.log(form.watch("category"));
 
   return (
     <Form {...form}>
