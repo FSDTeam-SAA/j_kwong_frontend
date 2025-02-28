@@ -4,7 +4,7 @@ import { NumberTicker } from "../magicui/number-ticker";
 import axios from "axios";
 
 export default function StatsBar() {
-  const [stats, setStats] = useState({ blogs: 0, categories: 0, readers: 54 });
+  const [stats, setStats] = useState({ blogs: 0, categories: 0, readers: 0 });
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -13,10 +13,12 @@ export default function StatsBar() {
           `${process.env.NEXT_PUBLIC_API_URL}/api/v1/stats`
         );
 
-        console.log("my responssssssssssssssssssssssssss", response.data.data);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?publish=true`
+        );
 
         setStats({
-          blogs: response.data.data.totalBlogs,
+          blogs: res.data.pagination.totalBlogs,
           categories: response.data.data.totalCategory,
           readers: response.data.data.totalViews,
         });
