@@ -51,7 +51,6 @@ export default function ArticleForm({ mode = "add", initialData }) {
   const [isCategoriesLoading, setIsCategoriesLoading] = React.useState(true);
 
   const token = Cookies.get("authToken");
-  if (!token) return;
 
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -62,7 +61,6 @@ export default function ArticleForm({ mode = "add", initialData }) {
         if (response.data.status) {
           setCategories(response.data.data);
         }
-        // console.log(response);
       } catch (error) {
         console.error("Error fetching categories:", error);
       } finally {
@@ -80,7 +78,7 @@ export default function ArticleForm({ mode = "add", initialData }) {
           date: initialData.date ? new Date(initialData.date) : new Date(),
           referenceUrl: initialData.referenceUrl?.length
             ? initialData.referenceUrl
-            : [""], // Ensure it's an array
+            : [""],
 
           category: initialData?.category._id,
         }
@@ -127,7 +125,7 @@ export default function ArticleForm({ mode = "add", initialData }) {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        withCredentials: true, // ⬅️ Ensures cookies (including auth token) are sent automatically
+        withCredentials: true,
       });
 
       if (response.status) {
@@ -159,8 +157,6 @@ export default function ArticleForm({ mode = "add", initialData }) {
       currentUrls.filter((_, i) => i !== index)
     );
   };
-
-  console.log(form.watch("category"));
 
   return (
     <Form {...form}>

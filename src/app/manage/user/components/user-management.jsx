@@ -53,6 +53,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
+import axios from "axios";
 
 const userShape = {
   _id: "",
@@ -79,8 +80,9 @@ export default function UserManagement() {
   const [isCreating, setIsCreating] = useState(false);
 
   const token = Cookies.get("authToken");
-  if (!token) return;
+  const userId = Cookies.get("userId");
 
+  console.log(userId);
   const form = useForm({
     defaultValues: {
       fullName: "",
@@ -92,24 +94,31 @@ export default function UserManagement() {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       try {
+        if (!userId) {
+          toast.error("User ID is missing!");
+          return;
+        }
+
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/me`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/${userId}`,
           {
             withCredentials: true, // Ensures cookies are sent
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // Add your token here
-            },
           }
         );
 
-        if (response.data.status) {
-          setCurrentUser(response.data.data);
+        if (response?.data?.status) {
+          setCurrentUser(response?.data?.data || {});
         } else {
-          toast.error(response.data.message || "Failed to fetch current user");
+          toast.error(
+            response?.data?.message || "Failed to fetch current user"
+          );
         }
       } catch (error) {
-        toast.error("Failed to fetch current user details");
+        console.error("Error fetching current user:", error);
+        toast.error(
+          error?.response?.data?.message ||
+            "Failed to fetch current user details"
+        );
       }
     };
 
