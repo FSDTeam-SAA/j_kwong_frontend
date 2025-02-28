@@ -1,5 +1,4 @@
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
