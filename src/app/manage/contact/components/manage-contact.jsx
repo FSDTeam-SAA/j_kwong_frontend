@@ -92,18 +92,11 @@ export default function ContactAdmin() {
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/contact/${id}`
       );
       if (response.data.status) {
-        toast({
-          title: "Success",
-          description: "Message deleted successfully",
-        });
+        toast("Message deleted successfully");
         fetchMessages();
       }
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete message",
-        variant: "destructive",
-      });
+      toast("Failed to delete message");
     } finally {
       setIsDeleteDialogOpen(false);
       setMessageToDelete(null);
