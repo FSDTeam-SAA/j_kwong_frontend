@@ -21,6 +21,7 @@ import { Check, Cross, Loader2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import ConfirmDeleteDialog from "./confirm-delete-dialog";
+import { generateImage } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -161,94 +162,100 @@ export default function AdminArticlesList() {
         <>
           {/* Posts Grid */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {posts.map((post) => (
-              <Card
-                key={post._id}
-                className="relative overflow-hidden bg-white/80 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-48 overflow-hidden">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_API_URL}${post.image}`}
-                      alt=""
-                      height={200}
-                      width={400}
-                      className="h-full w-full object-cover"
-                    />
-                    <Badge className={`absolute right-2 top-2 text-white`}>
-                      {post?.category?.title ?? "Unknown"}
-                    </Badge>
-                  </div>
-                  <CardHeader className="space-y-1">
-                    <h3 className="line-clamp-2 text-lg font-semibold">
-                      {post.title}
-                    </h3>
-                    <p className="line-clamp-3 text-sm text-zinc-400">
-                      {stripHtmlTags(post.description)}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-zinc-500">
-                      <span>{post.authorName}</span>
-                      <span>•</span>
-                      <span>{new Date(post.date).toLocaleDateString()}</span>
+            {posts.map((post) => {
+              const fullImageUrl = generateImage(post.image);
+              console.log(fullImageUrl);
+              return (
+                <Card
+                  key={post._id}
+                  className="relative overflow-hidden bg-white/80 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={fullImageUrl}
+                        alt=""
+                        height={200}
+                        width={400}
+                        className="h-full w-full object-cover"
+                      />
+                      <Badge className={`absolute right-2 top-2 text-white`}>
+                        {post?.category?.title ?? "Unknown"}
+                      </Badge>
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <Link href={`/manage/article/details/${post.slug}`}>
-                      <Button
-                        variant="link"
-                        className="h-auto p-0 text-blue-400 hover:text-blue-300"
-                      >
-                        Details
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </div>
-
-                <div>
-                  <CardFooter className="flex flex-col space-y-2">
-                    <div className="flex w-full gap-2">
-                      <Link
-                        href={`/manage/article/edit/${post.slug}`}
-                        className="w-1/2"
-                        passHref
-                      >
-                        <Button className="flex-1 bg-yellow-500  hover:bg-yellow-600 text-white w-full">
-                          Edit
+                    <CardHeader className="space-y-1">
+                      <h3 className="line-clamp-2 text-lg font-semibold">
+                        {post.title}
+                      </h3>
+                      <p className="line-clamp-3 text-sm text-zinc-400">
+                        {stripHtmlTags(post.description)}
+                      </p>
+                      <div className="flex items-center gap-2 text-sm text-zinc-500">
+                        <span>{post.authorName}</span>
+                        <span>•</span>
+                        <span>{new Date(post.date).toLocaleDateString()}</span>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <Link href={`/manage/article/details/${post.slug}`}>
+                        <Button
+                          variant="link"
+                          className="h-auto p-0 text-blue-400 hover:text-blue-300"
+                        >
+                          Details
                         </Button>
                       </Link>
-                      <Button
-                        className="flex-1 bg-red-500 text-white hover:bg-red-600  w-full"
-                        onClick={() => handleOpenDelete(post.slug)}
-                      >
-                        Delete
-                      </Button>
-                      <ConfirmDeleteDialog
-                        open={openDelete}
-                        onClose={() => setOpenDelete(false)}
-                        slug={selectedSlug}
-                        setUpdateFetch={setUpdateFetch}
-                      />
-                    </div>
-                    <Button
-                      className={`w-full ${
-                        post.isPublished
-                          ? "bg-yellow-500 hover:bg-yellow-600"
-                          : "bg-primary hover:bg-primary/80"
-                      }`}
-                      onClick={() => handlePublish(post.slug, post.isPublished)}
-                    >
-                      {post.isPublished ? "Unpublish" : "Publish"}
+                    </CardContent>
+                  </div>
 
-                      {!post.isPublished ? (
-                        <Check className="ml-1 h-4 w-4" />
-                      ) : (
-                        <div>X</div>
-                      )}
-                    </Button>
-                  </CardFooter>
-                </div>
-              </Card>
-            ))}
+                  <div>
+                    <CardFooter className="flex flex-col space-y-2">
+                      <div className="flex w-full gap-2">
+                        <Link
+                          href={`/manage/article/edit/${post.slug}`}
+                          className="w-1/2"
+                          passHref
+                        >
+                          <Button className="flex-1 bg-yellow-500  hover:bg-yellow-600 text-white w-full">
+                            Edit
+                          </Button>
+                        </Link>
+                        <Button
+                          className="flex-1 bg-red-500 text-white hover:bg-red-600  w-full"
+                          onClick={() => handleOpenDelete(post.slug)}
+                        >
+                          Delete
+                        </Button>
+                        <ConfirmDeleteDialog
+                          open={openDelete}
+                          onClose={() => setOpenDelete(false)}
+                          slug={selectedSlug}
+                          setUpdateFetch={setUpdateFetch}
+                        />
+                      </div>
+                      <Button
+                        className={`w-full ${
+                          post.isPublished
+                            ? "bg-yellow-500 hover:bg-yellow-600"
+                            : "bg-primary hover:bg-primary/80"
+                        }`}
+                        onClick={() =>
+                          handlePublish(post.slug, post.isPublished)
+                        }
+                      >
+                        {post.isPublished ? "Unpublish" : "Publish"}
+
+                        {!post.isPublished ? (
+                          <Check className="ml-1 h-4 w-4" />
+                        ) : (
+                          <div>X</div>
+                        )}
+                      </Button>
+                    </CardFooter>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
 
           {/* Pagination */}

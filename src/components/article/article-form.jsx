@@ -142,7 +142,15 @@ export default function ArticleForm({ mode = "add", initialData }) {
 
   const handleImageUpload = (file) => {
     if (!file) return;
-    form.setValue("image", file);
+
+    // Sanitize the filename (replace spaces with underscores)
+    const sanitizedFile = new File(
+      [file],
+      file.name.replace(/\s+/g, "_"), // Replace spaces with underscores
+      { type: file.type }
+    );
+
+    form.setValue("image", sanitizedFile);
   };
 
   const addReferenceUrl = () => {
