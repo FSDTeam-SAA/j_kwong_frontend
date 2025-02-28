@@ -32,6 +32,8 @@ import {
 } from "@/components/ui/table";
 import { toast } from "sonner";
 import { Edit2, Loader2, Plus, Trash } from "lucide-react";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 export function CategoryManagement() {
   const [categories, setCategories] = React.useState([]);
@@ -41,6 +43,10 @@ export function CategoryManagement() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const token = Cookies.get("authToken");
+
+  if (!token) return;
 
   const fetchCategories = React.useCallback(async () => {
     try {
@@ -69,22 +75,24 @@ export function CategoryManagement() {
     try {
       const url = selectedCategory
         ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories/${selectedCategory.slug}`
-        : "${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories";
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories`;
 
-      const method = selectedCategory ? "PUT" : "POST";
+      const method = selectedCategory ? "put" : "post";
 
-      const response = await fetch(url, {
+      const response = await axios({
         method,
+        url,
+        data: { title },
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ title }),
-        credentials: "include",
+        withCredentials: true, // Ensures cookies (e.g., auth token) are included
       });
 
-      const data = await response.json();
-      console.log(" response data", data);
-      if (data.status) {
+      console.log("Response data:", response.data);
+
+      if (response.data.status) {
         toast("Category updated successfully");
         fetchCategories();
         setIsDialogOpen(false);
@@ -93,6 +101,10 @@ export function CategoryManagement() {
       }
     } catch (error) {
       toast("Failed to save category");
+      console.error(
+        "Error saving category:",
+        error.response?.data || error.message
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -102,20 +114,18 @@ export function CategoryManagement() {
     if (!selectedCategory) return;
 
     try {
-      const response = await fetch(
+      const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/categories/${selectedCategory.slug}`,
         {
-          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          credentials: "include",
+          withCredentials: true, // Ensures cookies (e.g., auth token) are included
         }
       );
 
-      const data = await response.json();
-
-      if (data.status) {
+      if (response.data.status) {
         toast("Category deleted successfully");
         fetchCategories();
         setIsDeleteDialogOpen(false);
@@ -123,6 +133,10 @@ export function CategoryManagement() {
       }
     } catch (error) {
       toast("Failed to delete category");
+      console.error(
+        "Error deleting category:",
+        error.response?.data || error.message
+      );
     }
   };
 
