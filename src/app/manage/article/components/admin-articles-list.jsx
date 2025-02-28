@@ -176,7 +176,7 @@ export default function AdminArticlesList() {
                       className="h-full w-full object-cover"
                     />
                     <Badge className={`absolute right-2 top-2 text-white`}>
-                      {post.category.title}
+                      {post?.category?.title ?? "Unknown"}
                     </Badge>
                   </div>
                   <CardHeader className="space-y-1">
