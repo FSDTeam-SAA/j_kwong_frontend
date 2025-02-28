@@ -16,7 +16,6 @@ import {
 } from "../ui/drawer";
 import { Form } from "../ui/form";
 import { Input } from "../ui/input";
-import { MorphingText } from "../magicui/morphing-text";
 
 const logoText = ["the", "green", "cloister"];
 export function Header() {
@@ -24,6 +23,8 @@ export function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isTop, setIsTop] = useState(true);
   const [open, setOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
+
   const pathname = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
@@ -163,7 +164,7 @@ export function Header() {
           </Drawer>
           {/* search drawer end -------------------------------------------------- */}
           {/* Mobile Menu */}
-          <Sheet>
+          <Sheet open={openMobile} onOpenChange={setOpenMobile}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
@@ -197,21 +198,24 @@ export function Header() {
               <nav className="mt-8 flex flex-col space-y-4">
                 {/* Mobile Category Dropdown */}
                 <Link
-                  href="/about"
-                  className={`text-lg ${getLinkStyle("/about")}`}
+                  href="/article"
+                  className={`text-lg text-white `}
+                  onClick={() => setOpenMobile(false)}
                 >
                   All Articles
                 </Link>
 
                 <Link
                   href="/about"
-                  className={`text-lg ${getLinkStyle("/about")}`}
+                  className={`text-lg text-white `}
+                  onClick={() => setOpenMobile(false)}
                 >
                   About Us
                 </Link>
                 <Link
                   href="/contact"
-                  className={`text-lg ${getLinkStyle("/contact")}`}
+                  className={`text-lg text-white `}
+                  onClick={() => setOpenMobile(false)}
                 >
                   Contact Us
                 </Link>

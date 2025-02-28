@@ -3,7 +3,7 @@ import ArticleList from "./components/article-list";
 
 const page = () => {
   return (
-    <div className="container">
+    <div className="container my-5">
       <ArticleList />
     </div>
   );

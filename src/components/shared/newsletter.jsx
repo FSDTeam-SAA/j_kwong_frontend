@@ -37,7 +37,7 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="bg-[#E6FFDD] lg:mt-[80px] relative">
+    <div className="bg-[#E6FFDD] lg:mt-[80px] relative overflow-hidden">
       <Particles
         className="absolute inset-0 z-0"
         quantity={800}

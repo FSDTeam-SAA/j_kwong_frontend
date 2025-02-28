@@ -33,19 +33,17 @@ export default function WhoAreWe() {
             </p>
           </FadeL>
 
-          <FadeR className="relative md:translate-x-[-80px] lg:mb-2">
-            <div className=" mb-[50px] lg:mb-2">
-              <div className="  flex justify-center ">
-                <Image
-                  src="/assets/about.jpeg"
-                  alt="Who are we Image"
-                  width={800}
-                  height={1300}
-                  className="w-[250px] h-[420px] lg:w-[300px] lg:h-[500px] rounded-[12px] overflow-hidden"
-                />
-              </div>
+          <div className=" mb-[50px] lg:mb-2">
+            <div className="  flex justify-center ">
+              <Image
+                src="/assets/about.jpeg"
+                alt="Who are we Image"
+                width={800}
+                height={1300}
+                className="w-[250px] h-[420px] lg:w-[300px] lg:h-[500px] rounded-[12px] overflow-hidden"
+              />
             </div>
-          </FadeR>
+          </div>
         </div>
       </div>
     </section>
