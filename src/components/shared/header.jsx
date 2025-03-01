@@ -181,7 +181,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] sm:w-[400px] border-none bg-primary"
+              className="w-[50%] border-none bg-primary"
             >
               <SheetHeader>
                 <div className="flex justify-end">
@@ -195,7 +195,7 @@ export function Header() {
                   </SheetTrigger>
                 </div>
               </SheetHeader>
-              <nav className="mt-8 flex flex-col space-y-4">
+              <nav className="mt-14 flex flex-col space-y-4">
                 {/* Mobile Category Dropdown */}
                 <Link
                   href="/article"

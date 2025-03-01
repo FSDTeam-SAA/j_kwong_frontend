@@ -142,7 +142,7 @@ export default function ArticleListContent() {
                 <Button
                   type="submit"
                   size="icon"
-                  className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 h-full w-[40px] rounded-none rounded-r-md cursor-default"
                 >
                   <Search className="h-4 w-4" />
                   <span className="sr-only">Search</span>
@@ -169,10 +169,13 @@ export default function ArticleListContent() {
             </Select>
           </div>
         </div>
-
         {isLoading ? (
           <div className="flex justify-center items-center min-h-[400px]">
-            <Loader2 className="h-8 w-8 animate-spin" />
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : articles.length < 1 ? (
+          <div className="flex justify-center items-center min-h-[400px] text-gray-500">
+            No article found
           </div>
         ) : (
           <>

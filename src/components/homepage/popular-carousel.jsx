@@ -56,7 +56,7 @@ export default function PopularCarousel() {
         <div className="flex items-center justify-center gap-2 mb-10">
           <div className="w-2 h-8 bg-primary"></div>
           <h2 className="text-textPrimary text-[24px] md:text-[34px] font-semibold">
-            Popular This Month
+            Popular This Week
           </h2>
         </div>
         <FadeB>

@@ -55,7 +55,7 @@ export default function Hero() {
                     width={800}
                     height={500}
                     alt="Logo"
-                    className="h-[70px] w-[300px] md:h-[120px] md:w-[600px]"
+                    className="h-[85px] w-[370px] md:h-[120px] md:w-[600px]"
                   />
                 </FadeR>
                 <StaggeredText

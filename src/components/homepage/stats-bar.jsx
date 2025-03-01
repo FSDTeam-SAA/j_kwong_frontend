@@ -30,7 +30,7 @@ export default function StatsBar() {
     fetchStats();
   }, []);
   return (
-    <div className="max-w-[770px] bg-white backdrop-blur-[70px] shadow-md py-8 px-4 rounded-[12px] w-[98%] lg:w-full mx-auto">
+    <div className="max-w-[770px] bg-white backdrop-blur-[70px] shadow-md py-8 px-4 rounded-[12px] w-[95%] lg:w-full mx-auto">
       <div className="grid grid-cols-3 gap-8 text-center">
         <div className="space-y-2">
           <NumberTicker

@@ -42,7 +42,6 @@ const HomePage = () => {
       <Hero />
       <PopularCarousel />
       <ArchiveArticles />
-      <WhoAreWe />
     </div>
   );
 };

@@ -68,7 +68,7 @@ const ArticleCard = ({ article, index }) => {
           href={`/article/${article.slug}`}
           className="group relative block w-fit"
         >
-          <h2 className="mb-3 text-[14px] lg:text-[20px] font-semibold leading-tight text-textPrimary hover:text-primary relative transition-all duration-300 line-clamp-2">
+          <h2 className="mb-3 text-[18px] lg:text-[21px] font-semibold leading-tight text-textPrimary hover:text-primary relative transition-all duration-300 line-clamp-2">
             {article.title}
           </h2>
         </Link>
@@ -88,7 +88,7 @@ const ArticleCard = ({ article, index }) => {
 
 const ArticleGrid = ({ articles }) => {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap:2 md:gap-5 md:grid-cols-2 lg:grid-cols-3">
       {articles.map((article, index) => (
         <ArticleCard key={article.slug} article={article} index={index} />
       ))}

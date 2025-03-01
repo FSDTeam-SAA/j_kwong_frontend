@@ -29,7 +29,7 @@ export default function TiptapEditor({ value = "", onChange }) {
         HTMLAttributes: {
           class: "highlight",
         },
-        colors: ["#10b981"], // Adding emerald-500 color for the highlighter
+        colors: ["#3DBC12"], // Adding emerald-500 color for the highlighter
       }),
       Superscript,
       Placeholder.configure({

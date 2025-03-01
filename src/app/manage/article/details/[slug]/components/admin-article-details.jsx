@@ -71,7 +71,8 @@ export default function AdminArticleDetails() {
             <Badge variant="secondary" className="ml-2 bg-primary text-white">
               {article.category.title}
             </Badge>
-            <span>{article.views}</span>
+            <span>Total no of readers for this blog:</span>
+            <span className="font-semibold text-black">{article.views}</span>
           </div>
 
           {/* Title */}

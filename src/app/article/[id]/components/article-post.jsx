@@ -68,13 +68,18 @@ export default function ArticlePost() {
               <CalendarIcon className="h-4 w-4" />
               {formattedDate}
             </span>
-            <Badge variant="secondary" className="ml-2 bg-primary text-white">
-              {article.category.title}
-            </Badge>
+            {article.category && (
+              <Badge
+                variant="secondary"
+                className="ml-2 bg-primary text-white hover:bg-primary/80"
+              >
+                {article.category.title}
+              </Badge>
+            )}
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
+          <h1 className="text-[26px] md:text-[34px] font-semibold leading-tight">
             {article.title}
           </h1>
         </div>
@@ -96,12 +101,19 @@ export default function ArticlePost() {
         <div className="prose prose-invert max-w-none">
           <div
             className="text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: article.description }}
+            dangerouslySetInnerHTML={{
+              __html: article?.description.replace(
+                /<p><\/p>/g,
+                "<p>&nbsp;</p>"
+              ),
+            }}
           />
         </div>
         {/* references */}
         <div className="my-4 md:my-8">
-          <h3 className="my-4 md:my-8 font-bold">References:</h3>
+          <h3 className="my-4 md:my-8 font-bold text-[16px] md:text-[20px]">
+            References:
+          </h3>
           <ol>
             {article.referenceUrl.map((url, index) => (
               <li key={index} className="mr-2">
