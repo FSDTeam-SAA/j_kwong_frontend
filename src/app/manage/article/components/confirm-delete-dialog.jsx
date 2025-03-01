@@ -15,7 +15,6 @@ const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {
-    console.log(slug);
     if (!slug) return;
     setLoading(true);
     try {

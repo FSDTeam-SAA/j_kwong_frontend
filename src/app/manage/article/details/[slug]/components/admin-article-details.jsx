@@ -76,9 +76,9 @@ export default function AdminArticleDetails() {
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold leading-tight">
             {article.title}
-          </h1>
+          </h2>
         </div>
 
         {/* Featured Image */}

@@ -128,7 +128,7 @@ export default function BlogStatsChart() {
               color: "#3DBC12", // Green color
             },
           }}
-          className="h-[400px]  w-full"
+          className="h-[400px]  w-full "
         >
           <BarChart
             accessibilityLayer

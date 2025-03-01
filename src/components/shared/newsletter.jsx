@@ -37,7 +37,7 @@ export default function Newsletter() {
   };
 
   return (
-    <div className="bg-[#E6FFDD] lg:mt-[80px] relative overflow-hidden">
+    <div className="bg-[#E6FFDD] mt-[30px] lg:mt-[80px] relative overflow-hidden">
       <Particles
         className="absolute inset-0 z-0"
         quantity={500}
@@ -47,7 +47,7 @@ export default function Newsletter() {
       />
       <div className="container flex flex-wrap min-h-[350px] justify-between items-center py-10 gap-16 md:gap-0">
         <div className="max-w-3xl z-30">
-          <h2 className="text-textPrimary text-2xl font-semibold mb-2">
+          <h2 className="text-textPrimary text-2xl font-semibold mb-2 ">
             Subscribe to our Newsletter
           </h2>
           <p className="text-textPrimary mb-6">

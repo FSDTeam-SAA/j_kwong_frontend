@@ -82,7 +82,6 @@ export default function UserManagement() {
   const token = Cookies.get("authToken");
   const userId = Cookies.get("userId");
 
-  console.log(userId);
   const form = useForm({
     defaultValues: {
       fullName: "",

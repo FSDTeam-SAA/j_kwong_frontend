@@ -90,8 +90,6 @@ export function CategoryManagement() {
         withCredentials: true, // Ensures cookies (e.g., auth token) are included
       });
 
-      console.log("Response data:", response.data);
-
       if (response.data.status) {
         toast("Category updated successfully");
         fetchCategories();

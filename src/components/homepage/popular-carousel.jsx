@@ -13,7 +13,7 @@ import FadeB from "../animation/fadeB";
 import axios from "axios";
 
 export default function PopularCarousel() {
-  const [api, setApi] = useState();
+  const [api, setApi] = useState("");
   const [current, setCurrent] = useState(0);
   const [latestArticle, setLatestArticle] = useState([]);
 
@@ -55,7 +55,7 @@ export default function PopularCarousel() {
       <div>
         <div className="flex items-center justify-center gap-2 mb-10">
           <div className="w-2 h-8 bg-primary"></div>
-          <h2 className="text-textPrimary text-[24px] md:text-[34px] font-semibold">
+          <h2 className="text-textPrimary text-[24px] md:text-[34px] font-semibold font-playfair">
             Popular This Week
           </h2>
         </div>

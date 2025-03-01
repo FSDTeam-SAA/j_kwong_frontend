@@ -20,7 +20,6 @@ export default function Footer() {
 
     fetchBlogs();
   }, []);
-  console.log(blogs);
   return (
     <footer className="py-16">
       <div className="container">

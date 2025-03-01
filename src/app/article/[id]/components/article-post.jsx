@@ -79,9 +79,9 @@ export default function ArticlePost() {
           </div>
 
           {/* Title */}
-          <h1 className="text-[26px] md:text-[34px] font-semibold leading-tight">
+          <h2 className="text-[26px] md:text-[34px] font-semibold leading-tight font-playfair">
             {article.title}
-          </h1>
+          </h2>
         </div>
 
         {/* Featured Image */}

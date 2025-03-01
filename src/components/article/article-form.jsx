@@ -106,11 +106,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
       formData.append("date", data.date);
 
       if (data.image) {
-        console.log("appendinf");
         formData.append("image", data.image);
       }
-
-      console.log(formData.get("image"));
 
       const endpoint =
         mode === "add"
@@ -191,7 +188,6 @@ export default function ArticleForm({ mode = "add", initialData }) {
                 >
                   {field.value ? (
                     <div className="relative w-full h-full">
-                      {/* {console.log(field.value)} */}
                       <img
                         src={
                           field.value instanceof File

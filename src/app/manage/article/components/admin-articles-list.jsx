@@ -118,7 +118,6 @@ export default function AdminArticlesList() {
 
     try {
       const response = await axios.post(url);
-      console.log("Response:", response.data);
 
       fetchPosts();
     } catch (error) {
@@ -164,7 +163,6 @@ export default function AdminArticlesList() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {posts.map((post) => {
               const fullImageUrl = generateImage(post.image);
-              console.log(fullImageUrl);
               return (
                 <Card
                   key={post._id}
