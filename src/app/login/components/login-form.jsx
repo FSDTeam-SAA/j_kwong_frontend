@@ -22,13 +22,13 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); // State to hold error message
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setErrorMessage(""); // Clear any previous error messages
+    setErrorMessage("");
 
     try {
       const response = await axios.post(
@@ -45,25 +45,21 @@ export default function LoginForm() {
       if (data.status) {
         const { userFound } = data.data;
 
-        // Store token and user ID in cookies
-        // Cookies.set("authToken", token, {
-        //   expires: 7, // Expires in 7 days
-        //   secure: process.env.NODE_ENV === "production",
-        //   sameSite: "strict",
-        // });
-
         Cookies.set("userId", userFound._id, {
-          expires: 7,
+          // expires: 7,
           secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
+          sameSite: "None",
+        });
+        Cookies.set("authToken", data.data.token, {
+          // expires: 7,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "None",
         });
 
         toast.success(data.message);
 
-        // Redirect to dashboard or home page
         router.push("/manage");
       } else {
-        // Handle unsuccessful login attempt
         setErrorMessage(data.message || "Login failed");
       }
     } catch (error) {

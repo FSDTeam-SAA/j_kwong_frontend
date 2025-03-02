@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.ibb.co",
-        pathname: "/**", // Allow all paths
+        pathname: "/**",
       },
       {
         protocol: "http",
@@ -17,7 +17,13 @@ const nextConfig = {
         protocol: "http",
         hostname: "147.93.84.148",
         port: "5000",
-        pathname: "/**", // Allow all paths
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "https://admin.thegreencloister.com",
+        port: "5000",
+        pathname: "/**",
       },
     ],
   },
