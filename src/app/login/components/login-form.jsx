@@ -38,7 +38,6 @@ export default function LoginForm() {
           password,
         },
         {
-          withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       );
@@ -48,16 +47,8 @@ export default function LoginForm() {
       if (data.status) {
         const { userFound } = data.data;
 
-        Cookies.set("userId", userFound._id, {
-          expires: 7,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "None",
-        });
-        Cookies.set("authToken", data.data.token, {
-          expires: 7,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "None",
-        });
+        Cookies.set("userId", userFound._id);
+        Cookies.set("authToken", data.data.token);
 
         toast.success(data.message);
 
