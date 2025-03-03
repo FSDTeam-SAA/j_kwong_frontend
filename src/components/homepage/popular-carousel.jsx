@@ -76,7 +76,7 @@ export default function PopularCarousel() {
                     <Link href={`/article/${article.slug}`}>
                       <div className="border-2 border-primary rounded-lg min-w-[370px] h-[250px] box-border">
                         <Image
-                          src={`${process.env.NEXT_PUBLIC_API_URL}${article.image}`}
+                          src={`${article.image}`}
                           alt={article.title}
                           width={400}
                           height={400}

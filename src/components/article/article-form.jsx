@@ -190,10 +190,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
                       <img
                         src={
                           field.value instanceof File
-                            ? URL.createObjectURL(field.value) // Generate preview URL for new uploads
-                            : `${
-                                process.env.NEXT_PUBLIC_API_URL
-                              }${field.value.replace(/^uploads\//, "")}` // Use the custom base URL for existing images
+                            ? URL.createObjectURL(field.value) 
+                            : `${field.value.replace(/^uploads\//, "")}` 
                         }
                         alt="Blog image"
                         className="w-full h-full object-cover rounded-lg"

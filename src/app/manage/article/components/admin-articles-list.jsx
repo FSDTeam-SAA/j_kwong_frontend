@@ -162,7 +162,6 @@ export default function AdminArticlesList() {
           {/* Posts Grid */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {posts.map((post) => {
-              const fullImageUrl = generateImage(post.image);
               return (
                 <Card
                   key={post._id}
@@ -171,7 +170,7 @@ export default function AdminArticlesList() {
                   <div>
                     <div className="relative h-48 overflow-hidden">
                       <Image
-                        src={fullImageUrl}
+                        src={post.image}
                         alt=""
                         height={200}
                         width={400}

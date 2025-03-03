@@ -8,21 +8,13 @@ const nextConfig = {
         pathname: "/**",
       },
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "5000",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "147.93.84.148",
-        port: "5000",
-        pathname: "/**",
-      },
-      {
         protocol: "https",
-        hostname: "https://admin.thegreencloister.com",
-        // port: "5000",
+        hostname: "res.cloudinary.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "http", // Allow http
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
     ],

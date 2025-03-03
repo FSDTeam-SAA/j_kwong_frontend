@@ -46,7 +46,7 @@ const ArticleCard = ({ article, index }) => {
             </Badge>
           )}
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}${article.image}`}
+            src={`${article.image}`}
             alt={article.title}
             fill
             className="object-cover h-full w-full  duration-200 hover:scale-105"

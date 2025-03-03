@@ -67,14 +67,14 @@ export function Header() {
     >
       <div className="container mx-auto flex h-[60px] items-center justify-between px-4">
         {/* Left section with logo */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center gap-6">
           <Link href="/" className="items-center space-x-2">
             <Image
               src="/assets/logo.png"
               width={500}
               height={500}
               alt="Picture of the author"
-              className="h-[45px] w-[230px] md:h-[55px] md:w-[290px]"
+              className="h-[35px] w-[170px] md:h-[40px] md:w-[210px]"
             />
           </Link>
         </div>

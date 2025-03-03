@@ -88,7 +88,7 @@ export default function ArticlePost() {
         {article.image && (
           <div className="relative aspect-[16/9] mb-8">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}${article.image}`}
+              src={`${article.image}`}
               alt={article.title}
               fill
               className="object-cover rounded-lg"
