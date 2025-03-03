@@ -101,11 +101,14 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
 
   React.useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (!token) {
-      router.push("/login");
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("authToken");
+      console.log("hi from local storage");
+      if (!token) {
+        router.replace("/login");
+      }
     }
-  }, []);
+  }, [router]);
 
   const handleLogOut = () => {
     try {
