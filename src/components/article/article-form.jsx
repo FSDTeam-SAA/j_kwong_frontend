@@ -31,7 +31,6 @@ import {
 import { cn } from "@/lib/utils";
 import { z } from "zod";
 import axios from "axios";
-import Cookies from "js-cookie";
 import TiptapEditor from "./tiptap-editor";
 
 const blogFormSchema = z.object({
@@ -50,7 +49,7 @@ export default function ArticleForm({ mode = "add", initialData }) {
   const [categories, setCategories] = React.useState([]);
   const [isCategoriesLoading, setIsCategoriesLoading] = React.useState(true);
 
-  const token = Cookies.get("authToken");
+  const token = localStorage.getItem("authToken");
 
   React.useEffect(() => {
     const fetchCategories = async () => {

@@ -9,7 +9,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import Cookies from "js-cookie";
 
 const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +17,8 @@ const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
     if (!slug) return;
     setLoading(true);
     try {
-      const token = Cookies.get("authToken");
+      const token = localStorage.getItem("authToken");
+
       if (!token) {
         throw new Error("Authentication token not found. Please log in.");
       }

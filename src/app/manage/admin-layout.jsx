@@ -101,21 +101,21 @@ export default function AdminLayout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleLogOut = async () => {
+  React.useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      router.push("/login");
+    }
+  }, []);
+
+  const handleLogOut = () => {
     try {
-      // await axios.post(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`,
-      //   {}
-      // );
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userId");
 
-      // Remove auth-related cookies
-      Cookies.remove("authToken");
-      Cookies.remove("userId");
-
-      // Redirect to login page
       router.push("/login");
     } catch (error) {
-      console.error("Logout failed:", error.response?.data || error.message);
+      console.error("Logout failed:", error.message);
     }
   };
 

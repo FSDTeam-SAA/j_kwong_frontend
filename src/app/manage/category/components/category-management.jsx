@@ -33,7 +33,6 @@ import {
 import { toast } from "sonner";
 import { Edit2, Loader2, Plus, Trash } from "lucide-react";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 export function CategoryManagement() {
   const [categories, setCategories] = React.useState([]);
@@ -44,9 +43,11 @@ export function CategoryManagement() {
   const [title, setTitle] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const token = Cookies.get("authToken");
+  const token = localStorage.getItem("authToken");
 
-  if (!token) return;
+  if (!token) {
+    throw new Error("Authentication token not found. Please log in.");
+  }
 
   const fetchCategories = React.useCallback(async () => {
     try {

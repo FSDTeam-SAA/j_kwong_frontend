@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
 import { Trash2, Plus } from "lucide-react";
 import {
   Card,
@@ -79,8 +78,8 @@ export default function UserManagement() {
   const [open, setOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
-  const token = Cookies.get("authToken");
-  const userId = Cookies.get("userId");
+  const token = localStorage.getItem("authToken");
+  const userId = localStorage.getItem("userId");
 
   const form = useForm({
     defaultValues: {
