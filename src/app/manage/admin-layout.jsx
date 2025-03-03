@@ -25,7 +25,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Avatar } from "@/components/ui/avatar";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 const navItems = [
