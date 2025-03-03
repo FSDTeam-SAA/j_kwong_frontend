@@ -37,7 +37,10 @@ export default function LoginForm() {
           email,
           password,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
       );
 
       const data = response.data;
@@ -46,12 +49,12 @@ export default function LoginForm() {
         const { userFound } = data.data;
 
         Cookies.set("userId", userFound._id, {
-          // expires: 7,
+          expires: 7,
           secure: process.env.NODE_ENV === "production",
           sameSite: "None",
         });
         Cookies.set("authToken", data.data.token, {
-          // expires: 7,
+          expires: 7,
           secure: process.env.NODE_ENV === "production",
           sameSite: "None",
         });
