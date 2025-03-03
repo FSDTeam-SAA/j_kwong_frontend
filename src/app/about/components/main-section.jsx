@@ -8,8 +8,8 @@ const MainSection = () => {
         <div className="space-y-6 lg:w-[550px] text-[16px]">
           <p className="text-textPrimary leading-relaxed">
             The Green Cloister is an independent, student-run environmental
-            publication founded and led by Jensen and Jason, two students from
-            Winchester College originally from Hong Kong.
+            publication founded and coded by Jensen Kwong and Jason Chiang, two
+            green-minded students at Winchester College.
           </p>
 
           <p className="text-textPrimary leading-relaxed">
@@ -20,9 +20,9 @@ const MainSection = () => {
           </p>
 
           <p className="text-textPrimary leading-relaxed">
-            As founders and chief editors, our goal is to raise awareness,
-            explore diverse ecological topics, and inspire positive
-            environmental change on campus and beyond.
+            As founders and chief editors, our goal is to produce and provide a
+            platform; exploring diverse ecological topics and inspiring positive
+            environmental change on campus and in our local county, Hampshire.
           </p>
         </div>
 

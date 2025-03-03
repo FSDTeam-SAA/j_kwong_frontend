@@ -2,25 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Menu, Search, X, ChevronDown } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "../ui/sheet";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-} from "../ui/drawer";
-import { Form } from "../ui/form";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import { Input } from "../ui/input";
 
 const logoText = ["the", "green", "cloister"];
 export function Header() {
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isTop, setIsTop] = useState(true);
   const [open, setOpen] = useState(false);
   const [openMobile, setOpenMobile] = useState(false);
@@ -48,21 +39,12 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY) {
-        setVisible(false);
-      } else {
-        setVisible(true);
-      }
-
-      setIsTop(currentScrollY === 0);
-      setLastScrollY(currentScrollY);
+      setIsTop(window.scrollY === 0);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const getLinkStyle = (path) => {
     // Check if current path is an article route
@@ -78,12 +60,9 @@ export function Header() {
   };
 
   return (
-    <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: visible ? 0 : -100 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`fixed top-0 z-50 w-full transition-all  ${
-        isTop ? "bg-transparent" : "bg-white shadow-md"
+    <div
+      className={`fixed top-0 z-50 w-full transition-all ${
+        isTop ? "!bg-transparent" : "bg-white shadow-md"
       }`}
     >
       <div className="container mx-auto flex h-[60px] items-center justify-between px-4">
@@ -95,7 +74,7 @@ export function Header() {
               width={500}
               height={500}
               alt="Picture of the author"
-              className="h-[45px] w-[250px] md:h-[55px] md:w-[290px]"
+              className="h-[45px] w-[230px] md:h-[55px] md:w-[290px]"
             />
           </Link>
         </div>
@@ -224,6 +203,6 @@ export function Header() {
           </Sheet>
         </div>
       </div>
-    </motion.header>
+    </div>
   );
 }

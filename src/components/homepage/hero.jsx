@@ -61,7 +61,7 @@ export default function Hero() {
                 <StaggeredText
                   text="Student-run environmental publication, with roots at Winchester College"
                   delay={0.2}
-                  className="text-[#7ed957] text-md md:text-2xl font-normal"
+                  className="text-[#7ed957] text-xl md:text-2xl font-bold"
                   asWords="true"
                 />
                 <FadeR delay={1}>

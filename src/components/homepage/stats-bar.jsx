@@ -38,8 +38,8 @@ export default function StatsBar() {
             className="text-primary text-3xl md:text-4xl lg:text-5xl font-bold"
           />
           <div className="text-textPrimary text-lg md:text-xl lg:text-2xl font-semibold">
-            Categories
-            <br /> Explored
+            Topics
+            <br /> Covered
           </div>
         </div>
         <div className="space-y-2">
@@ -60,6 +60,8 @@ export default function StatsBar() {
           />
           <div className="text-textPrimary text-lg md:text-xl lg:text-2xl font-semibold">
             Readers
+            <br />
+            Engaged
           </div>
         </div>
       </div>

@@ -1,18 +1,12 @@
-import { Playfair_Display, Lora } from "next/font/google";
+import { AR_One_Sans } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/shared/layout-wrapper";
 import Head from "next/head";
 
-const playfair = Playfair_Display({
+const arOneSans = AR_One_Sans({
   subsets: ["latin"],
-  weight: ["700"], // Adjust weight if needed
-  variable: "--font-playfair",
-});
-
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400"], // Regular weight for body text
-  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"], // Regular, Medium, SemiBold, Bold, ExtraBold
+  variable: "--font-ar-one-sans",
 });
 
 export const metadata = {
@@ -32,7 +26,7 @@ export default function RootLayout({ children }) {
         />
         <link rel="icon" href="/favicon.png" /> {/* Ensure favicon is set */}
       </Head>
-      <body className={`${lora.className} antialiased bg-white`}>
+      <body className={`${arOneSans.className} antialiased bg-white`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
