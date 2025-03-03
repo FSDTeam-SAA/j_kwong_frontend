@@ -17,7 +17,10 @@ const ConfirmDeleteDialog = ({ open, onClose, slug, setUpdateFetch }) => {
     if (!slug) return;
     setLoading(true);
     try {
-      const token = localStorage.getItem("authToken");
+      let token = null;
+      if (typeof window !== "undefined") {
+        token = localStorage.getItem("authToken");
+      }
 
       if (!token) {
         throw new Error("Authentication token not found. Please log in.");

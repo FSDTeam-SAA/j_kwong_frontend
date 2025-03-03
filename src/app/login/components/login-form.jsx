@@ -45,8 +45,10 @@ export default function LoginForm() {
 
       if (data.status) {
         const { userFound } = data.data;
-        localStorage.setItem("authToken", data.data.token);
-        localStorage.setItem("userId", userFound._id);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("authToken", data.data.token);
+          localStorage.setItem("userId", userFound._id);
+        }
 
         toast.success(data.message);
 

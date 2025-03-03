@@ -103,7 +103,6 @@ export default function AdminLayout({ children }) {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("authToken");
-      console.log("hi from local storage");
       if (!token) {
         router.replace("/login");
       }
@@ -112,8 +111,10 @@ export default function AdminLayout({ children }) {
 
   const handleLogOut = () => {
     try {
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("userId");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userId");
+      }
 
       router.push("/login");
     } catch (error) {

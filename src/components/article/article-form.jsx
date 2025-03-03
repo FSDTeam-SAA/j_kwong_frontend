@@ -49,7 +49,9 @@ export default function ArticleForm({ mode = "add", initialData }) {
   const [categories, setCategories] = React.useState([]);
   const [isCategoriesLoading, setIsCategoriesLoading] = React.useState(true);
 
-  const token = localStorage.getItem("authToken");
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("authToken");
+  }
 
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -190,8 +192,8 @@ export default function ArticleForm({ mode = "add", initialData }) {
                       <img
                         src={
                           field.value instanceof File
-                            ? URL.createObjectURL(field.value) 
-                            : `${field.value.replace(/^uploads\//, "")}` 
+                            ? URL.createObjectURL(field.value)
+                            : `${field.value.replace(/^uploads\//, "")}`
                         }
                         alt="Blog image"
                         className="w-full h-full object-cover rounded-lg"

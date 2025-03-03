@@ -43,10 +43,8 @@ export function CategoryManagement() {
   const [title, setTitle] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const token = localStorage.getItem("authToken");
-
-  if (!token) {
-    throw new Error("Authentication token not found. Please log in.");
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("authToken");
   }
 
   const fetchCategories = React.useCallback(async () => {

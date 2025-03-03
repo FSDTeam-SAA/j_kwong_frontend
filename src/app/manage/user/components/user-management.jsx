@@ -78,8 +78,10 @@ export default function UserManagement() {
   const [open, setOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
 
-  const token = localStorage.getItem("authToken");
-  const userId = localStorage.getItem("userId");
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("authToken");
+    userId = localStorage.getItem("userId");
+  }
 
   const form = useForm({
     defaultValues: {
