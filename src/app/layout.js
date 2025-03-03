@@ -25,6 +25,22 @@ export default function RootLayout({ children }) {
           content="Student-run environmental publication with roots at Winchester College"
         />
         <link rel="icon" href="/favicon.png" /> {/* Ensure favicon is set */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              var _paq = window._paq = window._paq || [];
+              _paq.push(['trackPageView']);
+              _paq.push(['enableLinkTracking']);
+              (function() {
+                var u="https://thegreencloister.matomo.cloud/";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '1']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src='https://cdn.matomo.cloud/thegreencloister.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+              })();
+            `,
+          }}
+        />
       </Head>
       <body className={`${arOneSans.className} antialiased bg-white`}>
         <LayoutWrapper>{children}</LayoutWrapper>
