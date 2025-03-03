@@ -77,7 +77,7 @@ export default function UserManagement() {
   const [deleteLoading, setDeleteLoading] = useState(null);
   const [open, setOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
-
+  let token = null; 
   if (typeof window !== "undefined") {
     token = localStorage.getItem("authToken");
     userId = localStorage.getItem("userId");

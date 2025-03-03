@@ -42,7 +42,7 @@ export function CategoryManagement() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-
+  let token = null;
   if (typeof window !== "undefined") {
     token = localStorage.getItem("authToken");
   }
