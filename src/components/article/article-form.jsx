@@ -48,7 +48,7 @@ export default function ArticleForm({ mode = "add", initialData }) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [categories, setCategories] = React.useState([]);
   const [isCategoriesLoading, setIsCategoriesLoading] = React.useState(true);
-
+  let token = null;
   if (typeof window !== "undefined") {
     token = localStorage.getItem("authToken");
   }
