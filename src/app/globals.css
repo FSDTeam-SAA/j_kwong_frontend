@@ -22,6 +22,27 @@ body {
     --color-4: 195 100% 63%;
     --color-5: 90 100% 63%;
   }
+  h1 {
+    @apply text-4xl font-bold leading-relaxed; /* Large and bold */
+  }
+
+  h2 {
+    @apply text-3xl font-semibold leading-snug; /* Well-spaced but not too tight */
+  }
+
+  h3 {
+    @apply text-2xl font-medium leading-normal; /* Balanced spacing */
+  }
+
+  p {
+    @apply text-lg leading-relaxed; /* More relaxed for readability */
+  }
+
+  ul,
+  ol {
+    @apply text-lg leading-relaxed pl-5;
+  }
+
 }
 
 /* @layer base {
@@ -44,16 +65,16 @@ body {
 } */
 
 /* styles/globals.css */
-h1 {
-  @apply text-4xl font-bold;
+/* h1 {
+  @apply text-4xl font-bold ;
 }
 
 h2 {
-  @apply text-3xl font-semibold;
+  @apply text-3xl font-semibold ;
 }
 
 h3 {
-  @apply text-2xl font-medium;
+  @apply text-2xl font-medium leading-[500px];
 }
 
 ul {
@@ -62,4 +83,4 @@ ul {
 
 ol {
   @apply list-decimal pl-5;
-}
+} */

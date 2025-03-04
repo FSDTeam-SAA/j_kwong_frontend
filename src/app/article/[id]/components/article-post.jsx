@@ -100,7 +100,7 @@ export default function ArticlePost() {
         {/* Article Content */}
         <div className="prose prose-invert max-w-none">
           <div
-            className="text-lg leading-relaxed"
+            className=""
             dangerouslySetInnerHTML={{
               __html: article?.description.replace(
                 /<p><\/p>/g,

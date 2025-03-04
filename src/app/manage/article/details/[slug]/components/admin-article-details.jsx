@@ -98,7 +98,12 @@ export default function AdminArticleDetails() {
         <div className="prose prose-invert max-w-none">
           <div
             className="text-lg leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: article.description }}
+            dangerouslySetInnerHTML={{
+              __html: article?.description.replace(
+                /<p><\/p>/g,
+                "<p>&nbsp;</p>"
+              ),
+            }}
           />
         </div>
         <div className="my-4 md:my-8">
