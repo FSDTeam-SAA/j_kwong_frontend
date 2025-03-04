@@ -262,6 +262,7 @@ export default function ContactAdmin() {
                   handleDeleteClick(selectedMessage._id);
                 }
               }}
+              className="bg-red-500 hover:bg-red-600 text-white"
             >
               Delete
             </Button>
@@ -286,7 +287,7 @@ export default function ContactAdmin() {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => messageToDelete && deleteMessage(messageToDelete)}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="bg-red-500 text-white hover:bg-red-600"
             >
               Delete
             </AlertDialogAction>

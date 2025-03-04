@@ -30,7 +30,7 @@ export default function Newsletter() {
         setMessage("Something went wrong. Please try again.");
       }
     } catch (error) {
-      setMessage(error.response?.data?.message || "Failed to subscribe.");
+      setMessage(error.response?.data?.message || "Already Subscribed!");
     } finally {
       setLoading(false);
     }
