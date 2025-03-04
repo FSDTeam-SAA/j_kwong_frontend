@@ -195,7 +195,7 @@ export function CategoryManagement() {
                   required
                 />
               </div>
-              <DialogFooter>
+              <DialogFooter className={"flex gap-2"}>
                 <Button
                   type="button"
                   variant="outline"
@@ -210,7 +210,7 @@ export function CategoryManagement() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="bg-primary text-white hover:bg-primary/90"
                 >
                   {isSubmitting && (
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

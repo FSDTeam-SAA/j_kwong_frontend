@@ -423,7 +423,7 @@ export default function UserManagement() {
                                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => handleDeleteUser(user._id)}
-                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                  className="bg-destructive text-white bg-red-500 hover:bg-red-600 "
                                 >
                                   Delete
                                 </AlertDialogAction>

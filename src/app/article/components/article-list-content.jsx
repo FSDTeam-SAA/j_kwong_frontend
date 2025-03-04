@@ -198,7 +198,7 @@ export default function ArticleListContent() {
                     variant={currentPage === page ? "default" : "outline"}
                     className={`${
                       currentPage === page
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-primary text-white"
                         : "border-primary text-textPrimary"
                     }`}
                   >
