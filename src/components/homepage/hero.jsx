@@ -30,7 +30,7 @@ export default function Hero() {
       {/* Background Image with Gradient Overlay and Blur */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/homepage/hero.jpg"
+          src="https://res.cloudinary.com/drdztqgcx/image/upload/v1741070215/j_kowng/mcd0kxea9tmkrkqjiyes.jpg"
           alt="Hero background"
           fill
           className="object-cover"

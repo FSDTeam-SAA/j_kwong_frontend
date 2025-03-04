@@ -38,7 +38,7 @@ export default function Footer() {
               mission is to raise awareness and promote sustainability across
               campus and beyond.
             </p>
-            <div className="flex gap-4 text-gray-400">
+            {/* <div className="flex gap-4 text-gray-400">
               <Link href="#" className="hover:text-primary transition-colors">
                 <Facebook size={24} />
               </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
               <Link href="#" className="hover:text-primary transition-colors">
                 <Linkedin size={24} />
               </Link>
-            </div>
+            </div> */}
           </div>
 
           {/* Navigate Section */}

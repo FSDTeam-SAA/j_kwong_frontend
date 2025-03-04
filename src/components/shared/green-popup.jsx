@@ -21,7 +21,7 @@ export default function GreenPopup({ onClose }) {
         {/* Replace the circular gauge with the lightbulb city illustration */}
         <div className="relative w-64 h-64 mb-4">
           <Image
-            src="/assets/popup.png"
+            src="https://res.cloudinary.com/drdztqgcx/image/upload/v1741070215/j_kowng/pjgagw3je990we0snuwi.png"
             alt="Green energy concept with city inside a lightbulb"
             className="w-full h-full object-contain"
             width={500}

@@ -29,7 +29,7 @@ const MainSection = () => {
         <div className=" mb-[50px] lg:mb-2">
           <div className="  flex justify-center ">
             <Image
-              src="/assets/about.jpeg"
+              src="https://res.cloudinary.com/drdztqgcx/image/upload/v1741070214/j_kowng/ykm5kmgt7xd8wc1badyj.jpg"
               alt="Who are we Image"
               width={800}
               height={1300}
