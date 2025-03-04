@@ -49,34 +49,37 @@ export default function Hero() {
           >
             <div className="">
               <div className="space-y-4">
-                <FadeR delay={0.1} className="flex gap-3">
-                  <Image
-                    src="/assets/logo.png"
-                    width={800}
-                    height={500}
-                    alt="Logo"
-                    className="h-[85px] w-[370px] md:h-[120px] md:w-[600px]"
+                <div className="overflow-hidden">
+                  <FadeR delay={0.1} className="flex gap-3">
+                    <Image
+                      src="/assets/logo.png"
+                      width={800}
+                      height={500}
+                      alt="Logo"
+                      className="h-[85px] w-[370px] md:h-[120px] md:w-[600px]"
+                    />
+                  </FadeR>
+
+                  <StaggeredText
+                    text="Student-run environmental publication, with roots at Winchester College"
+                    delay={0.2}
+                    className="text-[#7ed957] text-xl md:text-2xl font-bold"
+                    asWords="true"
                   />
-                </FadeR>
-                <StaggeredText
-                  text="Student-run environmental publication, with roots at Winchester College"
-                  delay={0.2}
-                  className="text-[#7ed957] text-xl md:text-2xl font-bold"
-                  asWords="true"
-                />
-                <FadeR delay={1}>
-                  <blockquote className="border-l-4 border-[#7ed957] pl-4">
-                    <p className="text-lg md:text-xl text-white/90 italic">
-                      "What you do makes a difference, and you have to decide
-                      what kind of difference you want to make."
-                    </p>
-                    <footer className="mt-2 text-[#7ed957]">
-                      - Jane Goodall
-                    </footer>
-                  </blockquote>
-                </FadeR>
+                  <FadeR delay={1}>
+                    <blockquote className="border-l-4 border-[#7ed957] pl-4">
+                      <p className="text-lg md:text-xl text-white/90 italic">
+                        "What you do makes a difference, and you have to decide
+                        what kind of difference you want to make."
+                      </p>
+                      <footer className="mt-2 text-[#7ed957]">
+                        - Jane Goodall
+                      </footer>
+                    </blockquote>
+                  </FadeR>
+                </div>
               </div>
-              <div>
+              <div className="overflow-hidden">
                 <FadeR delay={1.2}>
                   <Link href="/article">
                     <Button
