@@ -28,14 +28,38 @@ export default function ArticleListContent() {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [hasPrevPage, setHasPrevPage] = useState(false);
 
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const searchParams = useSearchParams();
-
   const router = useRouter();
+
   useEffect(() => {
     const term = searchParams.get("searchTerm") || "";
     setSearchTerm(term);
+    setDebouncedSearchTerm(term);
   }, [searchParams]);
+
+  // Debounce effect for search
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (searchTerm !== debouncedSearchTerm) {
+        setDebouncedSearchTerm(searchTerm);
+        updateSearchParams(searchTerm);
+      }
+    }, 500); // 500ms debounce delay
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
+
+  const updateSearchParams = (value) => {
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set("searchTerm", value);
+    } else {
+      params.delete("searchTerm");
+    }
+    router.push(`?${params.toString()}`, undefined, { shallow: true });
+  };
 
   // Fetch categories
   const fetchCategories = useCallback(async () => {
@@ -53,14 +77,16 @@ export default function ArticleListContent() {
 
   // Fetch articles
   const fetchArticles = useCallback(async () => {
-    if (searchTerm === null) return;
+    if (debouncedSearchTerm === null) return;
 
     setIsLoading(true);
     setError("");
     try {
       const categoryParam =
         selectedCategory === "all" ? "" : `&category=${selectedCategory}`;
-      const search = searchTerm ? `&search=${searchTerm}` : "";
+      const search = debouncedSearchTerm
+        ? `&search=${debouncedSearchTerm}`
+        : "";
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blogs?page=${currentPage}&limit=${ITEMS_PER_PAGE}${categoryParam}${search}&publish=true`
       );
@@ -79,7 +105,7 @@ export default function ArticleListContent() {
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, selectedCategory, searchTerm]);
+  }, [currentPage, selectedCategory, debouncedSearchTerm]);
 
   // Initial fetch of categories and articles
   useEffect(() => {
@@ -88,24 +114,19 @@ export default function ArticleListContent() {
 
   useEffect(() => {
     fetchArticles();
-  }, [fetchArticles, searchTerm]);
+  }, [fetchArticles, debouncedSearchTerm]);
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
     setCurrentPage(1); // Reset to first page when category changes
   };
   const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchTerm(value);
+    setSearchTerm(e.target.value);
+  };
 
-    // Update the URL parameter
-    const params = new URLSearchParams(searchParams);
-    if (value) {
-      params.set("searchTerm", value);
-    } else {
-      params.delete("searchTerm");
-    }
-    router.push(`?${params.toString()}`, undefined, { shallow: true });
+  const handleSearchClick = () => {
+    setDebouncedSearchTerm(searchTerm); // Immediately update debounced term
+    updateSearchParams(searchTerm); // Trigger search immediately
   };
 
   const handlePageChange = (pageNumber) => {
@@ -125,7 +146,7 @@ export default function ArticleListContent() {
     <div className="container mx-auto px-4 mt-[150px]">
       <div className="space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <h1 className="text-4xl font-light text-textPrimary flex items-center w-full md:w-1/3">
+          <h1 className="text-textPrimary text-[24px] md:text-[34px] font-semibold flex items-center w-full md:w-1/3">
             <div className="h-8 w-2 bg-primary mr-2"></div>
             All Articles
           </h1>
@@ -140,9 +161,10 @@ export default function ArticleListContent() {
                   onChange={handleSearchChange}
                 />
                 <Button
-                  type="submit"
+                  type="button"
                   size="icon"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 h-full w-[40px] rounded-none rounded-r-md cursor-default"
+                  onClick={handleSearchClick}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 h-full w-[40px] rounded-none rounded-r-md"
                 >
                   <Search className="h-4 w-4" />
                   <span className="sr-only">Search</span>

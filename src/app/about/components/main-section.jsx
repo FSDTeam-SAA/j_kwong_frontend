@@ -38,18 +38,6 @@ const MainSection = () => {
           </div>
         </div>
       </div>
-      <div>
-        <h1 className="text-4xl font-light text-textPrimary flex items-center justify-start mb-[30px] lg:mb-[50px]">
-          <div className="h-8 w-2 bg-primary mr-2"></div>
-          About Us
-        </h1>
-        <p className="text-textPrimary">
-          The Green Cloister is an independent environmental publication,
-          created by passionate students from Winchester College. Our mission is
-          to raise awareness and promote sustainability across campus and
-          beyond.
-        </p>
-      </div>
     </div>
   );
 };

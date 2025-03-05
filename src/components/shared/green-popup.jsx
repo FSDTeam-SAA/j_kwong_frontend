@@ -15,7 +15,7 @@ export default function GreenPopup({ onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 left-5 max-w-sm w-full shadow-lg border rounded-3xl overflow-hidden z-50 font-sans">
+    <div className="fixed bottom-20 left-5 max-w-sm w-full shadow-lg border rounded-3xl overflow-hidden z-50">
       {/* Top section with white background */}
       <div className="bg-white p-6 pt-8 rounded-t-3xl relative flex flex-col items-center">
         {/* Replace the circular gauge with the lightbulb city illustration */}

@@ -65,12 +65,7 @@ const HomePage = () => {
       </div>
       {showPopup && (
         <div ref={popupRef}>
-          <GreenPopup
-            energyConsumption={9.3198}
-            co2Amount={3.57}
-            ledMinutes={55}
-            onClose={() => setShowPopup(false)}
-          />
+          <GreenPopup onClose={() => setShowPopup(false)} />
         </div>
       )}
       <Hero />
