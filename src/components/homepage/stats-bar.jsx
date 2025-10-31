@@ -34,12 +34,12 @@ export default function StatsBar() {
       <div className="grid grid-cols-3 gap-8 text-center">
         <div className="space-y-2">
           <NumberTicker
-            value={stats.categories}
+            value="152"
             className="text-primary text-3xl md:text-4xl lg:text-5xl font-bold"
           />
           <div className="text-textPrimary text-lg md:text-xl lg:text-2xl font-semibold">
-            Topics
-            <br /> Covered
+            Student
+            <br /> Writers
           </div>
         </div>
         <div className="space-y-2">
